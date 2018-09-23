@@ -1,0 +1,69 @@
+<div class="survey-creator-container">
+  <div class="form-header">
+      <h3>Survey Creator</h3>
+      <h5>Create your own survey</h5>
+  </div>
+  <form [formGroup]="surveyCreatorForm" (ngSubmit)="submitForm()">
+    <div title="Survey Title">
+      <label for="survey-title">Survey Title</label>
+      <input
+        type="text"
+        name="survey-title"
+        id="survey-title"
+        placeholder="Title"
+        formControlName="title"
+      >
+    </div>
+    <div title="Survey Description">
+      <label for="survey-description">Survey Description</label>
+      <input
+        type="textarea"
+        name="survey-description"
+        id="survey-description"
+        placeholder="Description"
+        formControlName="description"
+      >
+    </div>
+    <div title="Points to Award">
+      <label for="awarding-points">Awarding points upon completion</label>
+      <input
+        type="number"
+        name="awarding-points"
+        id="awarding-points"
+        placeholder="Awarding points"
+        formControlName="pointValue"
+      >
+    </div>
+    <div id="questions" formArrayName="questions">
+      <ng-container *ngFor="let item of surveyCreatorForm.get('questions')['controls'] index as questionIndex">
+        <div class="question">
+          <div title="Question Title">
+            <label for="question-title">Question Title</label>
+            <input
+              type="text"
+              name="question-title"
+              id="question-title"
+              placeholder="Title"
+              required
+            >
+            </div>
+            <div title="Question Type">
+              <label for="question-type">Question Type</label>
+              <select name="question-type" id="question-type">
+                <option value="text">Text Box</option>
+                <option value="checkbox">Check Boxes</option>
+                <option value="radio">Radio Buttons</option>
+              </select>
+            </div>
+        </div>
+      </ng-container>
+      <button type="button" (click)="addMoreQuestion()">Add More Question</button>
+    </div>
+    <div>
+      <button type="reset">Reset</button>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+
+
